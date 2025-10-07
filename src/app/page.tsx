@@ -24,6 +24,8 @@ export default function Home() {
     setIsVisible(true);
   }, []);
 
+  const whatsappGroupLink = process.env.WHATSAPPGROUPLINK;
+
   // Horizontal scroll tracking
   useEffect(() => {
     const container = scrollContainerRef.current;
@@ -268,12 +270,28 @@ export default function Home() {
                   {status === "success" ? (
                     <div className="text-center py-8 animate-fadeIn">
                       <h3 className="text-2xl font-bold mb-4 text-green-500">
-                        You&apos;re In!
+                        Registration Successful!
                       </h3>
-                      <p>
-                        Thanks for joining. Prepare to embrace your daring
-                        future.
+                      <p className="mb-6 text-gray-200">
+                        We would love to connect with you. Tap the button below
+                        to join our WhatsApp community and stay updated.
                       </p>
+
+                      <a
+                        href={whatsappGroupLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center px-6 py-3 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-semibold rounded-lg shadow-md transition duration-300"
+                      >
+                        <svg
+                          className="w-5 h-5 mr-2 fill-current"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 32 32"
+                        >
+                          <path d="M16.001 2.667c-7.364 0-13.333 5.969-13.333 13.333 0 2.354.621 4.645 1.797 6.671l-1.906 5.854 6.01-1.854c1.885 1.031 4.02 1.562 6.432 1.562 7.364 0 13.333-5.969 13.333-13.333S23.365 2.667 16.001 2.667zm0 24.001c-2.112 0-4.089-.552-5.842-1.594l-.417-.25-3.572 1.104 1.146-3.525-.271-.438c-1.146-1.854-1.75-4-1.75-6.146 0-6.039 4.927-10.966 10.966-10.966 6.021 0 10.948 4.927 10.948 10.966 0 6.039-4.927 10.948-10.948 10.948zm5.708-8.615c-.313-.156-1.854-.917-2.146-1.021-.292-.104-.5-.156-.708.156-.209.313-.813 1.021-1 1.229-.187.208-.375.229-.688.073-.313-.156-1.323-.479-2.521-1.521-.938-.833-1.563-1.865-1.75-2.177-.187-.313-.021-.479.135-.635.146-.145.313-.375.469-.563.156-.187.208-.313.313-.521.104-.208.052-.396-.021-.552-.073-.156-.688-1.667-.938-2.292-.25-.604-.5-.521-.688-.531-.177-.01-.396-.01-.615-.01s-.552.073-.844.354c-.292.292-1.104 1.083-1.104 2.635s1.135 3.063 1.292 3.281c.156.208 2.24 3.417 5.427 4.792.758.323 1.348.521 1.813.667.76.24 1.448.208 1.99.125.604-.094 1.854-.76 2.115-1.49.26-.729.26-1.354.187-1.49-.073-.135-.271-.208-.583-.354z" />
+                        </svg>
+                        Join WhatsApp Group
+                      </a>
                     </div>
                   ) : (
                     <form
