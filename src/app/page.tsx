@@ -24,7 +24,7 @@ export default function Home() {
     setIsVisible(true);
   }, []);
 
-  const whatsappGroupLink = process.env.WHATSAPPGROUPLINK;
+  const whatsappGroupLink = "https://chat.whatsapp.com/BRma6t5wIOj9s3SDHZKIks";
 
   // Horizontal scroll tracking
   useEffect(() => {
@@ -317,7 +317,7 @@ export default function Home() {
                             setErrorMessage("Enter your name");
                             return;
                           }
-                          if (!state || !city || !university) {
+                          if (!state || !city) {
                             setStatus("error");
                             setErrorMessage("All fields with * are required");
                             return;
@@ -409,11 +409,10 @@ export default function Home() {
 
                       <input
                         type="text"
-                        placeholder="University/Organization *"
+                        placeholder="University/Organization "
                         className="w-full p-3 bg-gray-900 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
                         value={university}
                         onChange={(e) => setUniversity(e.target.value)}
-                        required
                       />
 
                       <input
@@ -422,7 +421,6 @@ export default function Home() {
                         className="w-full p-3 bg-gray-900 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
                         value={department}
                         onChange={(e) => setDepartment(e.target.value)}
-                        required
                       />
 
                       {status === "error" && (
