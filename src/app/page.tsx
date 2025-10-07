@@ -7,6 +7,10 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
+  const [university, setUniversity] = useState("");
+  const [department, setDepartment] = useState("");
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
@@ -295,11 +299,20 @@ export default function Home() {
                             setErrorMessage("Enter your name");
                             return;
                           }
+                          if (!state || !city || !university) {
+                            setStatus("error");
+                            setErrorMessage("All fields with * are required");
+                            return;
+                          }
 
                           const formData = new FormData();
                           formData.append("email", email);
                           formData.append("name", name);
                           formData.append("phone", phone);
+                          formData.append("state", state);
+                          formData.append("city", city);
+                          formData.append("university", university);
+                          formData.append("department", department);
 
                           const res = await fetch("/api/lead", {
                             method: "POST",
@@ -317,6 +330,10 @@ export default function Home() {
                           setEmail("");
                           setPhone("");
                           setName("");
+                          setState("");
+                          setCity("");
+                          setUniversity("");
+                          setDepartment("");
                         } catch (error) {
                           console.error("Submission Error:", error);
                           setStatus("error");
@@ -352,6 +369,41 @@ export default function Home() {
                         className="w-full p-3 bg-gray-900 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
+                        required
+                      />
+                      <input
+                        type="text"
+                        placeholder="State *"
+                        className="w-full p-3 bg-gray-900 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+                        value={state}
+                        onChange={(e) => setState(e.target.value)}
+                        required
+                      />
+
+                      <input
+                        type="text"
+                        placeholder="City *"
+                        className="w-full p-3 bg-gray-900 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        required
+                      />
+
+                      <input
+                        type="text"
+                        placeholder="University/Organization *"
+                        className="w-full p-3 bg-gray-900 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+                        value={university}
+                        onChange={(e) => setUniversity(e.target.value)}
+                        required
+                      />
+
+                      <input
+                        type="text"
+                        placeholder="Department/Field of Study"
+                        className="w-full p-3 bg-gray-900 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+                        value={department}
+                        onChange={(e) => setDepartment(e.target.value)}
                         required
                       />
 

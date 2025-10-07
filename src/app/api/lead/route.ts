@@ -15,6 +15,10 @@ export async function POST(request: NextRequest) {
     const email = formData.get("email") as string;
     const phone = formData.get("phone") as string;
     const name = formData.get("name") as string;
+    const state = formData.get("state") as string;
+    const city = formData.get("city") as string;
+    const university = formData.get("university") as string;
+    const department = formData.get("department") as string;
 
     // Basic validation
     if (!email || typeof email !== "string" || !email.includes("@")) {
@@ -57,9 +61,18 @@ export async function POST(request: NextRequest) {
       (row) => row[0]?.trim().toLowerCase() === email.trim().toLowerCase()
     );
 
+    const phoneExists = rows.some((row) => row[4]?.trim() === phone.trim());
+
     if (emailExists) {
       return NextResponse.json(
         { error: "Email already registered" },
+        { status: 409 }
+      );
+    }
+
+    if (phoneExists) {
+      return NextResponse.json(
+        { error: "Phone number already registered" },
         { status: 409 }
       );
     }
@@ -74,10 +87,14 @@ export async function POST(request: NextRequest) {
         values: [
           [
             email.trim(),
-            name?.trim() || "N/A",
+            name?.trim() || "",
             timestamp,
-            "School for the Daring Website",
+            "SFD_Main",
             phone.trim(),
+            state?.trim() || "",
+            city?.trim() || "",
+            university?.trim() || "",
+            department?.trim() || "",
           ],
         ],
       },
