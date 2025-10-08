@@ -93,7 +93,7 @@ export default function VolunteerForm() {
       <div className="mb-6 text-center">
         <Link href="/" className="inline-block">
           <Image
-            src="/logo.png"
+            src="/white.svg"
             alt="Logo"
             width={200}
             height={100}
