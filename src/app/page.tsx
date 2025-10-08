@@ -172,9 +172,6 @@ export default function Home() {
           <div className="relative z-10 container mx-auto px-6 py-24 flex flex-col justify-center h-full">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div className="pt-52 md:pt-0">
-                <div className="text-3xl font-bold text-[#D4AF37] animate-fade-in">
-                  01
-                </div>
                 <h2 className="theme-title animate-slide-up">
                   We Challenge Conventions
                 </h2>
