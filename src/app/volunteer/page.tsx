@@ -80,7 +80,7 @@ export default function VolunteerForm() {
       setDepartment("");
       setAvailability("");
       setSelectedRoles("");
-      //eslint-disable-next-line no-console
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       setStatus("error");
       setErrorMessage(error.message || "Something went wrong");
@@ -97,8 +97,8 @@ export default function VolunteerForm() {
             alt="Logo"
             width={200}
             height={100}
-            priority // optional: for above-the-fold images
-            unoptimized // optional: if you're self-hosting and don't want optimization
+            priority
+            unoptimized
           />
         </Link>
       </div>
