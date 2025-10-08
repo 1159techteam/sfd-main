@@ -119,7 +119,7 @@ export default function ParticipateForm() {
             <label className="block mb-2 font-medium text-[#D4AF37]">Your Name *</label>
             <input
               type="text"
-              className="w-full p-3 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -129,7 +129,7 @@ export default function ParticipateForm() {
             <label className="block mb-2 font-medium text-[#D4AF37]">Your Email *</label>
             <input
               type="email"
-              className="w-full p-3 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -139,7 +139,7 @@ export default function ParticipateForm() {
             <label className="block mb-2 font-medium text-[#D4AF37]">Phone Number *</label>
             <input
               type="tel"
-              className="w-full p-3 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />
@@ -149,7 +149,7 @@ export default function ParticipateForm() {
             <label className="block mb-2 font-medium text-[#D4AF37]">State *</label>
             <input
               type="text"
-              className="w-full p-3 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
               value={stateField}
               onChange={(e) => setStateField(e.target.value)}
             />
@@ -159,7 +159,7 @@ export default function ParticipateForm() {
             <label className="block mb-2 font-medium text-[#D4AF37]">City *</label>
             <input
               type="text"
-              className="w-full p-3 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
               value={city}
               onChange={(e) => setCity(e.target.value)}
             />
@@ -169,7 +169,7 @@ export default function ParticipateForm() {
             <label className="block mb-2 font-medium text-[#D4AF37]">University / Organization</label>
             <input
               type="text"
-              className="w-full p-3 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
               value={university}
               onChange={(e) => setUniversity(e.target.value)}
             />
@@ -179,7 +179,7 @@ export default function ParticipateForm() {
             <label className="block mb-2 font-medium text-[#D4AF37]">Department / Field of Study</label>
             <input
               type="text"
-              className="w-full p-3 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
               value={department}
               onChange={(e) => setDepartment(e.target.value)}
             />

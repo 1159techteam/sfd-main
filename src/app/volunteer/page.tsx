@@ -132,7 +132,7 @@ export default function VolunteerForm() {
               type="text"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
-              className="w-full p-3 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
             />
           </div>
           
@@ -142,7 +142,7 @@ export default function VolunteerForm() {
               type="tel"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="w-full p-3 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
             />
           </div>
           
@@ -152,7 +152,7 @@ export default function VolunteerForm() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
             />
           </div>
           
@@ -162,7 +162,7 @@ export default function VolunteerForm() {
               type="text"
               value={state}
               onChange={(e) => setState(e.target.value)}
-              className="w-full p-3 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
             />
           </div>
           
@@ -172,7 +172,7 @@ export default function VolunteerForm() {
               type="text"
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              className="w-full p-3 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
             />
           </div>
           
@@ -182,7 +182,7 @@ export default function VolunteerForm() {
               type="text"
               value={university}
               onChange={(e) => setUniversity(e.target.value)}
-              className="w-full p-3 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
             />
           </div>
           
@@ -192,7 +192,7 @@ export default function VolunteerForm() {
               type="text"
               value={department}
               onChange={(e) => setDepartment(e.target.value)}
-              className="w-full p-3 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
             />
           </div>
 
