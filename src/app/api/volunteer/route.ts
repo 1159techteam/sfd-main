@@ -1,29 +1,39 @@
 import { NextRequest, NextResponse } from "next/server";
 import { google } from "googleapis";
 
-const GOOGLE_CLIENT_EMAIL = process.env.GOOGLE_CLIENT_EMAIL_2;
-const GOOGLE_PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY_2?.replace(
+const GOOGLE_CLIENT_EMAIL = process.env.GOOGLE_CLIENT_EMAIL;
+const GOOGLE_PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY?.replace(
   /\\n/g,
   "\n"
 );
-const GOOGLE_SHEET_ID = process.env.GOOGLE_SHEET_ID_2;
-const SHEET_NAME = "Sheet1";
+const GOOGLE_SHEET_ID = process.env.GOOGLE_SHEET_ID;
+const SHEET_NAME = "Sheet1"; // Make sure this matches your sheet name
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const email = body.email as string;
+    const fullName = body.fullName as string;
     const phone = body.phone as string;
-    const name = body.name as string;
+    const email = body.email as string;
     const state = body.state as string;
     const city = body.city as string;
     const university = body.university as string;
     const department = body.department as string;
+    const availability = body.availability as string;
+    const roles = body.roles as string;
 
     // Basic validation
     if (!email || typeof email !== "string" || !email.includes("@")) {
       return NextResponse.json(
         { error: "Invalid email address" },
+        { status: 400 }
+      );
+    }
+
+    // Validate required fields
+    if (!fullName || !phone || !state || !city) {
+      return NextResponse.json(
+        { error: "All fields are required" },
         { status: 400 }
       );
     }
@@ -79,44 +89,54 @@ export async function POST(request: NextRequest) {
 
     // Append new row
     const timestamp = new Date().toISOString();
+    const volunteerRoles = roles;
+
     await sheets.spreadsheets.values.append({
       spreadsheetId: GOOGLE_SHEET_ID,
-      range: `${SHEET_NAME}!A:D`,
+      range: `${SHEET_NAME}!A:K`,
       valueInputOption: "RAW",
       requestBody: {
         values: [
           [
             email.trim(),
-            name?.trim() || "",
+            fullName.trim(),
             timestamp,
-            "SFD_Participants",
+            "SFD_Volunteers",
             phone.trim(),
-            state?.trim() || "",
-            city?.trim() || "",
-            university?.trim() || "",
-            department?.trim() || "",
+            state.trim(),
+            city.trim(),
+            university.trim(),
+            department.trim(),
+            availability.trim(),
+            volunteerRoles,
           ],
         ],
       },
     });
 
-    console.log("✅ Successfully posted to Google Sheets");
+    console.log("Successfully posted");
 
     return NextResponse.json(
       {
         success: true,
-        message: `Congratulations ${name.trim()}, You've successfully registered for the movement!`,
+        message: `Congratulations ${fullName.trim()}, You've successfully registered to Volunteer!`,
         data: {
           email: email.trim(),
-          name: name?.trim() || "N/A",
-          timestamp,
+          fullName: fullName.trim(),
           phone: phone.trim(),
+          state: state.trim(),
+          city: city.trim(),
+          university: university.trim(),
+          department: department.trim(),
+          availability: availability.trim(),
+          roles: volunteerRoles,
+          timestamp,
         },
       },
       { status: 201 }
     );
   } catch (error) {
-    console.error("❌ API Error:", error);
+    console.error(" API Error:", error);
     return NextResponse.json(
       { error: "Failed to process registration" },
       { status: 500 }
