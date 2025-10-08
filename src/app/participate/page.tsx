@@ -114,55 +114,76 @@ export default function ParticipateForm() {
           <h2 className="text-2xl font-bold mb-4 text-center text-[#D4AF37]">
             Join The Movement
           </h2>
-          <input
-            type="text"
-            placeholder="Your Name *"
-            className="w-full p-3 bg-gray-900 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="Your Email *"
-            className="w-full p-3 bg-gray-900 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="tel"
-            placeholder="Phone Number *"
-            className="w-full p-3 bg-gray-900 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="State *"
-            className="w-full p-3 bg-gray-900 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
-            value={stateField}
-            onChange={(e) => setStateField(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="City *"
-            className="w-full p-3 bg-gray-900 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="University / Organization"
-            className="w-full p-3 bg-gray-900 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
-            value={university}
-            onChange={(e) => setUniversity(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Department / Field of Study"
-            className="w-full p-3 bg-gray-900 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
-            value={department}
-            onChange={(e) => setDepartment(e.target.value)}
-          />
+          
+          <div>
+            <label className="block mb-2 font-medium text-[#D4AF37]">Your Name *</label>
+            <input
+              type="text"
+              className="w-full p-3 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          
+          <div>
+            <label className="block mb-2 font-medium text-[#D4AF37]">Your Email *</label>
+            <input
+              type="email"
+              className="w-full p-3 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          
+          <div>
+            <label className="block mb-2 font-medium text-[#D4AF37]">Phone Number *</label>
+            <input
+              type="tel"
+              className="w-full p-3 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+          
+          <div>
+            <label className="block mb-2 font-medium text-[#D4AF37]">State *</label>
+            <input
+              type="text"
+              className="w-full p-3 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+              value={stateField}
+              onChange={(e) => setStateField(e.target.value)}
+            />
+          </div>
+          
+          <div>
+            <label className="block mb-2 font-medium text-[#D4AF37]">City *</label>
+            <input
+              type="text"
+              className="w-full p-3 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+          </div>
+          
+          <div>
+            <label className="block mb-2 font-medium text-[#D4AF37]">University / Organization</label>
+            <input
+              type="text"
+              className="w-full p-3 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+              value={university}
+              onChange={(e) => setUniversity(e.target.value)}
+            />
+          </div>
+          
+          <div>
+            <label className="block mb-2 font-medium text-[#D4AF37]">Department / Field of Study</label>
+            <input
+              type="text"
+              className="w-full p-3 border border-gray-700 rounded focus:ring-2 focus:ring-[#D4AF37]"
+              value={department}
+              onChange={(e) => setDepartment(e.target.value)}
+            />
+          </div>
 
           {status === "error" && (
             <div className="text-red-500 text-sm font-semibold bg-red-500/10 p-2 rounded">

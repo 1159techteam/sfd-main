@@ -139,8 +139,8 @@ export default function Home() {
                 Become a Participant
               </button>
               <button
-                onClick={() => router.push("/volunteer")}
-                className="text-sm text-gray-300 underline hover:text-white"
+                onClick={() => router.push("/participate")}
+                className="px-6 py-3 bg-white text-[#D4AF37] font-semibold rounded-full hover:text-yellow-400 transition"
               >
                 Click here to Volunteer
               </button>
