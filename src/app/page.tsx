@@ -136,13 +136,19 @@ export default function Home() {
                 onClick={() => router.push("/participate")}
                 className="px-6 py-3 bg-[#D4AF37] text-white font-semibold rounded-full hover:bg-yellow-400 transition"
               >
-                Become a Participant
+                Register to Attend
               </button>
               <button
                 onClick={() => router.push("/participate")}
                 className="px-6 py-3 bg-white text-[#D4AF37] font-semibold rounded-full hover:text-yellow-400 transition"
               >
                 Click here to Volunteer
+              </button>
+               <button
+                onClick={() => router.push("/scholarship")}
+                className="px-6 py-3 bg-[#D4AF37] text-white font-semibold rounded-full hover:bg-yellow-400 transition"
+              >
+                Register for Grant/Scholarship
               </button>
             </div>
           </div>
