@@ -4,9 +4,9 @@ import { google } from "googleapis";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const GOOGLE_CLIENT_EMAIL = process.env.GOOGLE_CLIENT_EMAIL_SCHOOLARSHIP || "";
-const GOOGLE_PRIVATE_KEY = (process.env.GOOGLE_PRIVATE_KEY_SCHOOLARSHIP || "").replace(/\\n/g, "\n");
-const GOOGLE_SHEET_ID = process.env.GOOGLE_SHEET_ID_SCHOOLARSHIP || "";
+const GOOGLE_CLIENT_EMAIL_SCHOOLARSHIP = process.env.GOOGLE_CLIENT_EMAIL_SCHOOLARSHIP || "";
+const GOOGLE_PRIVATE_KEY_SCHOOLARSHIP = (process.env.GOOGLE_PRIVATE_KEY_SCHOOLARSHIP || "").replace(/\\n/g, "\n");
+const GOOGLE_SHEET_ID_SCHOOLARSHIP = process.env.GOOGLE_SHEET_ID_SCHOOLARSHIP || "";
 const SHEET_NAME = "Sheet1";
 
 const t = (v: unknown) => (typeof v === "string" ? v.trim() : "");
@@ -28,14 +28,14 @@ export async function POST(request: NextRequest) {
     const businessName = t(raw.businessName);
     const businessNature = t(raw.businessNature);
 
-    if (!GOOGLE_CLIENT_EMAIL || !GOOGLE_PRIVATE_KEY || !GOOGLE_SHEET_ID) {
+    if (!GOOGLE_CLIENT_EMAIL_SCHOOLARSHIP || !GOOGLE_PRIVATE_KEY_SCHOOLARSHIP || !GOOGLE_SHEET_ID_SCHOOLARSHIP) {
       return NextResponse.json(
         {
           error: "Config missing",
           details: {
-            GOOGLE_CLIENT_EMAIL,
-            hasPrivateKey: !!GOOGLE_PRIVATE_KEY,
-            GOOGLE_SHEET_ID,
+            GOOGLE_CLIENT_EMAIL_SCHOOLARSHIP,
+            hasPrivateKey: !!GOOGLE_PRIVATE_KEY_SCHOOLARSHIP,
+            GOOGLE_SHEET_ID_SCHOOLARSHIP,
           },
         },
         { status: 500 }
@@ -58,8 +58,8 @@ export async function POST(request: NextRequest) {
     let auth;
     try {
       auth = new google.auth.JWT({
-        email: GOOGLE_CLIENT_EMAIL,
-        key: GOOGLE_PRIVATE_KEY,
+        email: GOOGLE_CLIENT_EMAIL_SCHOOLARSHIP,
+        key: GOOGLE_PRIVATE_KEY_SCHOOLARSHIP,
         scopes: ["https://www.googleapis.com/auth/spreadsheets"],
       });
       await auth.authorize();
@@ -75,7 +75,7 @@ export async function POST(request: NextRequest) {
 
     // --- METADATA TEST (ensures correct sheet id + access) ---
     try {
-      await sheets.spreadsheets.get({ spreadsheetId: GOOGLE_SHEET_ID });
+      await sheets.spreadsheets.get({ spreadsheetId: GOOGLE_SHEET_ID_SCHOOLARSHIP });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
       return NextResponse.json(
@@ -100,7 +100,7 @@ export async function POST(request: NextRequest) {
     // --- APPEND TEST ---
     try {
       await sheets.spreadsheets.values.append({
-        spreadsheetId: GOOGLE_SHEET_ID,
+        spreadsheetId: GOOGLE_SHEET_ID_SCHOOLARSHIP,
         range: `${SHEET_NAME}!A:I`,
         valueInputOption: "RAW",
         insertDataOption: "INSERT_ROWS",
