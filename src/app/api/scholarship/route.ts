@@ -42,11 +42,11 @@ export async function POST(request: NextRequest) {
     }
 
     if (category === "scholarship") {
-      if (!name || !institution || !phone || !department) {
+      if (!name || !institution || !phone || !department || !category || !reason) {
         return NextResponse.json({ error: "All scholarship fields are required." }, { status: 400 });
       }
     } else {
-      if (!businessName || !businessNature || !reason || !phone || !reason) {
+      if (!businessName || !businessNature || !reason || !phone || !reason || !category) {
         return NextResponse.json({ error: "All grant fields are required." }, { status: 400 });
       }
     }
