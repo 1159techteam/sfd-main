@@ -1,3 +1,5 @@
+
+
 "use client";
 
 import { useState } from "react";
@@ -8,11 +10,11 @@ export default function ScholarshipForm() {
   const [category, setCategory] = useState("");
   const [name, setName] = useState("");
   const [institution, setInstitution] = useState("");
-  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [department, setDepartment] = useState("");
   const [businessName, setBusinessName] = useState("");
   const [businessNature, setBusinessNature] = useState("");
+  const [reason, setReason] = useState("");
 
   type Status = "idle" | "loading" | "success" | "error";
   const [status, setStatus] = useState<Status>("idle");
@@ -20,14 +22,14 @@ export default function ScholarshipForm() {
 
   const validate = () => {
     // Scholarship validation (always visible)
-    if (!name || !institution || !email || !phone || !department) {
+    if (!name || !institution || !phone || !department) {
       setErrorMessage("All fields marked * are required for Scholarship.");
       return false;
     }
 
     // Grant validation (conditionally visible)
     if (category === "grant") {
-      if (!businessName || !businessNature) {
+      if (!businessName || !businessNature || !phone || !reason) {
         setErrorMessage("All fields marked * are required for Grant.");
         return false;
       }
@@ -52,7 +54,6 @@ export default function ScholarshipForm() {
       category,
       name,
       institution,
-      email,
       phone,
       department,
     };
@@ -60,6 +61,7 @@ export default function ScholarshipForm() {
     if (category === "grant") {
       payload.businessName = businessName;
       payload.businessNature = businessNature;
+      payload.reason = reason;
     }
 
     try {
@@ -76,7 +78,7 @@ export default function ScholarshipForm() {
       // Reset form
       setStatus("success");
       setName("");
-      setEmail("");
+      setReason("");
       setPhone("");
       setInstitution("");
       setDepartment("");
@@ -138,7 +140,19 @@ export default function ScholarshipForm() {
 
           <div>
             <label className="block mb-2 font-medium text-[#D4AF37]">
-              University *
+              Department *
+            </label>
+            <input
+              type="text"
+              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
+              value={department}
+              onChange={(e) => setDepartment(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label className="block mb-2 font-medium text-[#D4AF37]">
+              Institution *
             </label>
             <select
               className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
@@ -146,21 +160,9 @@ export default function ScholarshipForm() {
               onChange={(e) => setInstitution(e.target.value)}
             >
               <option value="">Select an option</option>
-              <option value="unilorin">University of Ilorin</option>
-              <option value="others">Others</option>
+              <option value="University of Ilorin">University of Ilorin</option>
+              <option value="Others">Others</option>
             </select>
-          </div>
-
-          <div>
-            <label className="block mb-2 font-medium text-[#D4AF37]">
-              Your Email *
-            </label>
-            <input
-              type="email"
-              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
           </div>
 
           <div>
@@ -175,22 +177,12 @@ export default function ScholarshipForm() {
             />
           </div>
 
-          <div>
-            <label className="block mb-2 font-medium text-[#D4AF37]">
-              Department / Field of Study *
-            </label>
-            <input
-              type="text"
-              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
-              value={department}
-              onChange={(e) => setDepartment(e.target.value)}
-            />
-          </div>
+          
 
           {/* Category Selection */}
           <div>
             <label className="block mb-2 font-medium text-[#D4AF37]">
-              Category (Optional)
+              Category
             </label>
             <select
               className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
@@ -198,6 +190,7 @@ export default function ScholarshipForm() {
               onChange={(e) => setCategory(e.target.value)}
             >
               <option value="">Select an option</option>
+              <option value="scholarship">Scholarship</option>
               <option value="grant">Grant</option>
             </select>
           </div>
@@ -226,6 +219,16 @@ export default function ScholarshipForm() {
                   className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
                   value={businessNature}
                   onChange={(e) => setBusinessNature(e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="block mb-2 font-medium text-[#D4AF37]">
+                  Why do you deserve this *
+                </label>
+                <textarea
+                  className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black resize-none  h-30"
+                  value={reason}
+                  onChange={(e) => setReason(e.target.value)}
                 />
               </div>
             </>

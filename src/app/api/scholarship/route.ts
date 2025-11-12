@@ -10,7 +10,6 @@ const GOOGLE_SHEET_ID_SCHOOLARSHIP = process.env.GOOGLE_SHEET_ID_SCHOOLARSHIP ||
 const SHEET_NAME = "Sheet1";
 
 const t = (v: unknown) => (typeof v === "string" ? v.trim() : "");
-const emailOk = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 const phoneOk = (p: string) => /^[0-9+\-()\s]{7,}$/.test(p);
 
 export async function POST(request: NextRequest) {
@@ -22,7 +21,7 @@ export async function POST(request: NextRequest) {
 
     const name = t(raw.name);
     const institution = t(raw.institution);
-    const email = t(raw.email).toLowerCase();
+    const reason = t(raw.reason);
     const phone = t(raw.phone).replace(/\s+/g, "");
     const department = t(raw.department);
     const businessName = t(raw.businessName);
@@ -43,15 +42,14 @@ export async function POST(request: NextRequest) {
     }
 
     if (category === "scholarship") {
-      if (!name || !institution || !email || !phone || !department) {
+      if (!name || !institution || !phone || !department) {
         return NextResponse.json({ error: "All scholarship fields are required." }, { status: 400 });
       }
     } else {
-      if (!businessName || !businessNature || !email || !phone) {
+      if (!businessName || !businessNature || !reason || !phone || !reason) {
         return NextResponse.json({ error: "All grant fields are required." }, { status: 400 });
       }
     }
-    if (!emailOk(email)) return NextResponse.json({ error: "Invalid email." }, { status: 400 });
     if (!phoneOk(phone)) return NextResponse.json({ error: "Invalid phone." }, { status: 400 });
 
     // --- AUTH TEST ---
@@ -86,14 +84,14 @@ export async function POST(request: NextRequest) {
 
     const timestamp = new Date().toLocaleString("en-GB", { timeZone: "Africa/Lagos" });
     const row = [
-      category,
       name || "",
-      institution || "",
-      email || "",
-      phone || "",
       department || "",
+      institution || "",
+      phone || "",
+      category,
       businessName || "",
       businessNature || "",
+      reason || "",
       timestamp,
     ];
 
