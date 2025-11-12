@@ -22,14 +22,14 @@ export default function ScholarshipForm() {
 
   const validate = () => {
     // Scholarship validation (always visible)
-    if (!name || !institution || !phone || !department) {
+    if (!name || !institution || !phone || !department || !category || !reason) {
       setErrorMessage("All fields marked * are required for Scholarship.");
       return false;
     }
 
     // Grant validation (conditionally visible)
     if (category === "grant") {
-      if (!businessName || !businessNature || !phone || !reason) {
+      if (!businessName || !businessNature || !phone || !reason || !category) {
         setErrorMessage("All fields marked * are required for Grant.");
         return false;
       }
@@ -56,6 +56,7 @@ export default function ScholarshipForm() {
       institution,
       phone,
       department,
+      reason,
     };
 
     if (category === "grant") {
@@ -182,7 +183,7 @@ export default function ScholarshipForm() {
           {/* Category Selection */}
           <div>
             <label className="block mb-2 font-medium text-[#D4AF37]">
-              Category
+              Category *
             </label>
             <select
               className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
@@ -221,7 +222,10 @@ export default function ScholarshipForm() {
                   onChange={(e) => setBusinessNature(e.target.value)}
                 />
               </div>
-              <div>
+            </>
+          )}
+
+           <div>
                 <label className="block mb-2 font-medium text-[#D4AF37]">
                   Why do you deserve this *
                 </label>
@@ -231,8 +235,6 @@ export default function ScholarshipForm() {
                   onChange={(e) => setReason(e.target.value)}
                 />
               </div>
-            </>
-          )}
 
           {status === "error" && (
             <div className="text-red-500 text-sm font-semibold bg-red-500/10 p-2 rounded">
