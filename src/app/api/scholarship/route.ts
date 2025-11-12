@@ -4,9 +4,9 @@ import { google } from "googleapis";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const GOOGLE_CLIENT_EMAIL = process.env.GOOGLE_CLIENT_EMAIL || "";
-const GOOGLE_PRIVATE_KEY = (process.env.GOOGLE_PRIVATE_KEY || "").replace(/\\n/g, "\n");
-const GOOGLE_SHEET_ID = process.env.GOOGLE_SHEET_ID || "";
+const GOOGLE_CLIENT_EMAIL = process.env.GOOGLE_CLIENT_EMAIL_SCHOOLARSHIP || "";
+const GOOGLE_PRIVATE_KEY = (process.env.GOOGLE_PRIVATE_KEY_SCHOOLARSHIP || "").replace(/\\n/g, "\n");
+const GOOGLE_SHEET_ID = process.env.GOOGLE_SHEET_ID_SCHOOLARSHIP || "";
 const SHEET_NAME = "Sheet1";
 
 const t = (v: unknown) => (typeof v === "string" ? v.trim() : "");
