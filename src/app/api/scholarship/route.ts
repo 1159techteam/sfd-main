@@ -26,6 +26,7 @@ export async function POST(request: NextRequest) {
     const department = t(raw.department);
     const businessName = t(raw.businessName);
     const businessNature = t(raw.businessNature);
+    const cgpa = t(raw.cgpa);
 
     if (!GOOGLE_CLIENT_EMAIL_SCHOOLARSHIP || !GOOGLE_PRIVATE_KEY_SCHOOLARSHIP || !GOOGLE_SHEET_ID_SCHOOLARSHIP) {
       return NextResponse.json(
@@ -42,7 +43,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (category === "scholarship") {
-      if (!name || !institution || !phone || !department || !category || !reason) {
+      if (!name || !institution || !phone || !department || !category || !reason || !cgpa) {
         return NextResponse.json({ error: "All scholarship fields are required." }, { status: 400 });
       }
     } else {
@@ -93,6 +94,7 @@ export async function POST(request: NextRequest) {
       businessNature || "",
       reason || "",
       timestamp,
+      cgpa || "",
     ];
 
     // --- APPEND TEST ---
