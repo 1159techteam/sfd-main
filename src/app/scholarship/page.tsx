@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import { useState } from "react";
@@ -15,6 +13,7 @@ export default function ScholarshipForm() {
   const [businessName, setBusinessName] = useState("");
   const [businessNature, setBusinessNature] = useState("");
   const [reason, setReason] = useState("");
+  const [cgpa, setCgpa] = useState("");
 
   type Status = "idle" | "loading" | "success" | "error";
   const [status, setStatus] = useState<Status>("idle");
@@ -22,14 +21,14 @@ export default function ScholarshipForm() {
 
   const validate = () => {
     // Scholarship validation (always visible)
-    if (!name || !institution || !phone || !department || !category || !reason) {
+    if (!name || !institution || !phone || !department || !category || !reason || !cgpa) {
       setErrorMessage("All fields marked * are required for Scholarship.");
       return false;
     }
 
     // Grant validation (conditionally visible)
     if (category === "grant") {
-      if (!businessName || !businessNature || !phone || !reason || !category) {
+      if (!businessName || !businessNature || !phone || !reason || !category || !cgpa) {
         setErrorMessage("All fields marked * are required for Grant.");
         return false;
       }
@@ -57,6 +56,7 @@ export default function ScholarshipForm() {
       phone,
       department,
       reason,
+      cgpa,
     };
 
     if (category === "grant") {
@@ -86,6 +86,7 @@ export default function ScholarshipForm() {
       setBusinessName("");
       setBusinessNature("");
       setCategory("");
+      setCgpa("");
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
@@ -164,6 +165,17 @@ export default function ScholarshipForm() {
               <option value="University of Ilorin">University of Ilorin</option>
               <option value="Others">Others</option>
             </select>
+          </div>
+          <div>
+            <label className="block mb-2 font-medium text-[#D4AF37]">
+              C.G.P.A *
+            </label>
+             <input
+              type="text"
+              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
+              value={cgpa}
+              onChange={(e) => setCgpa(e.target.value)} 
+            />
           </div>
 
           <div>
