@@ -1,268 +1,40 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
+import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ScholarshipForm() {
-  const [category, setCategory] = useState("");
-  const [name, setName] = useState("");
-  const [institution, setInstitution] = useState("");
-  const [phone, setPhone] = useState("");
-  const [department, setDepartment] = useState("");
-  const [businessName, setBusinessName] = useState("");
-  const [businessNature, setBusinessNature] = useState("");
-  const [reason, setReason] = useState("");
-  const [cgpa, setCgpa] = useState("");
-
-  type Status = "idle" | "loading" | "success" | "error";
-  const [status, setStatus] = useState<Status>("idle");
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const validate = () => {
-    // Scholarship validation (always visible)
-    if (!name || !institution || !phone || !department || !category || !reason || !cgpa) {
-      setErrorMessage("All fields marked * are required for Scholarship.");
-      return false;
-    }
-
-    // Grant validation (conditionally visible)
-    if (category === "grant") {
-      if (!businessName || !businessNature || !phone || !reason || !category || !cgpa) {
-        setErrorMessage("All fields marked * are required for Grant.");
-        return false;
-      }
-    }
-
-    return true;
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("loading");
-    setErrorMessage("");
-
-    if (!validate()) {
-      setStatus("error");
-      return;
-    }
-
-    // Build payload dynamically
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const payload: any = {
-      category,
-      name,
-      institution,
-      phone,
-      department,
-      reason,
-      cgpa,
-    };
-
-    if (category === "grant") {
-      payload.businessName = businessName;
-      payload.businessNature = businessNature;
-      payload.reason = reason;
-    }
-
-    try {
-      const res = await fetch("/api/scholarship", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const data: any = await res.json();
-      if (!res.ok) throw new Error(data.error || "Submission failed");
-
-      // Reset form
-      setStatus("success");
-      setName("");
-      setReason("");
-      setPhone("");
-      setInstitution("");
-      setDepartment("");
-      setBusinessName("");
-      setBusinessNature("");
-      setCategory("");
-      setCgpa("");
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      setStatus("error");
-      setErrorMessage(err.message || "Something went wrong");
-    }
-  };
-
   return (
-    <div className="p-8 bg-black/80 rounded-lg border border-gray-800 max-w-lg mx-auto mt-2">
-      {/* Logo */}
-      <div className="mb-6 text-center">
-        <Link href="/" className="inline-block">
+    <div className="min-h-screen flex items-center justify-center bg-black/90 p-6">
+      <div className="bg-black border border-gray-800 rounded-2xl p-10 max-w-md w-full text-center shadow-xl">
+        
+        {/* Logo */}
+        <Link href="/" className="inline-block mb-6">
           <Image
             src="/white.svg"
             alt="Logo"
-            width={200}
-            height={100}
+            width={180}
+            height={80}
             priority
             unoptimized
           />
         </Link>
+
+        <h1 className="text-3xl font-bold text-[#D4AF37] mb-4">
+          Registration Closed
+        </h1>
+
+        <p className="text-gray-300 leading-relaxed mb-6">
+          Thank you for applying for the <span className="text-[#D4AF37] font-semibold">Grant and Scholarship opportunity!</span>.  
+        </p>
+        <Link
+          href="/"
+          className="inline-block bg-[#D4AF37] hover:bg-yellow-500 text-white font-bold py-3 px-6 rounded-full transition"
+        >
+          Go Back Home
+        </Link>
       </div>
-
-      {status === "success" ? (
-        <div className="text-center py-8">
-          <h3 className="text-2xl font-bold mb-4 text-green-500">
-            Registration Successful!
-          </h3>
-          <p className="mb-6 text-gray-200">
-            Thank you for registering! <br />
-            Create your video, collaborate and tag us.
-          </p>
-        </div>
-      ) : (
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <h2 className="text-2xl font-bold mb-4 text-center text-[#D4AF37]">
-            Join The Movement
-          </h2>
-
-          {/* Scholarship Fields (always visible) */}
-          <div>
-            <label className="block mb-2 font-medium text-[#D4AF37]">
-              Your Name *
-            </label>
-            <input
-              type="text"
-              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-
-          <div>
-            <label className="block mb-2 font-medium text-[#D4AF37]">
-              Department *
-            </label>
-            <input
-              type="text"
-              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
-              value={department}
-              onChange={(e) => setDepartment(e.target.value)}
-            />
-          </div>
-
-          <div>
-            <label className="block mb-2 font-medium text-[#D4AF37]">
-              Institution *
-            </label>
-            <select
-              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
-              value={institution}
-              onChange={(e) => setInstitution(e.target.value)}
-            >
-              <option value="">Select an option</option>
-              <option value="University of Ilorin">University of Ilorin</option>
-              <option value="Others">Others</option>
-            </select>
-          </div>
-          <div>
-            <label className="block mb-2 font-medium text-[#D4AF37]">
-              C.G.P.A *
-            </label>
-             <input
-              type="text"
-              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
-              value={cgpa}
-              onChange={(e) => setCgpa(e.target.value)} 
-            />
-          </div>
-
-          <div>
-            <label className="block mb-2 font-medium text-[#D4AF37]">
-              Phone Number *
-            </label>
-            <input
-              type="tel"
-              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-          </div>
-
-          
-
-          {/* Category Selection */}
-          <div>
-            <label className="block mb-2 font-medium text-[#D4AF37]">
-              Category *
-            </label>
-            <select
-              className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option value="">Select an option</option>
-              <option value="scholarship">Scholarship</option>
-              <option value="grant">Grant</option>
-            </select>
-          </div>
-
-          {/* Grant Fields (conditionally visible below Scholarship) */}
-          {category === "grant" && (
-            <>
-              <div>
-                <label className="block mb-2 font-medium text-[#D4AF37]">
-                  Name of Business *
-                </label>
-                <input
-                  type="text"
-                  className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
-                  value={businessName}
-                  onChange={(e) => setBusinessName(e.target.value)}
-                />
-              </div>
-
-              <div>
-                <label className="block mb-2 font-medium text-[#D4AF37]">
-                  Nature of Business *
-                </label>
-                <input
-                  type="text"
-                  className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black"
-                  value={businessNature}
-                  onChange={(e) => setBusinessNature(e.target.value)}
-                />
-              </div>
-            </>
-          )}
-
-           <div>
-                <label className="block mb-2 font-medium text-[#D4AF37]">
-                  Why do you deserve this *
-                </label>
-                <textarea
-                  className="w-full p-3 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#D4AF37] text-black resize-none  h-30"
-                  value={reason}
-                  onChange={(e) => setReason(e.target.value)}
-                />
-              </div>
-
-          {status === "error" && (
-            <div className="text-red-500 text-sm font-semibold bg-red-500/10 p-2 rounded">
-              {errorMessage}
-            </div>
-          )}
-
-          <button
-            type="submit"
-            disabled={status === "loading"}
-            className="w-full bg-[#D4AF37] hover:bg-yellow-500 text-white font-bold py-3 px-4 rounded disabled:opacity-50"
-          >
-            {status === "loading" ? "Submitting..." : "Join The Movement"}
-          </button>
-        </form>
-      )}
     </div>
   );
 }
